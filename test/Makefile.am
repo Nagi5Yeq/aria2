@@ -135,7 +135,6 @@ aria2c_SOURCES += BtAllowedFastMessageTest.cc\
 	BtSuggestPieceMessageTest.cc\
 	BtUnchokeMessageTest.cc\
 	DefaultPieceStorageTest.cc\
-	DefaultBtAnnounceTest.cc\
 	DefaultBtMessageDispatcherTest.cc\
 	DefaultBtRequestFactoryTest.cc\
 	MockBtMessage.h\
