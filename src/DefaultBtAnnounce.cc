@@ -177,10 +177,10 @@ std::string DefaultBtAnnounce::getAnnounceUrl()
           "left=%" PRId64 "&"
           "numwant=%d&"
           "key=%x&"
-          "compact=1&"
+          "compact=1&",
           stat.getSessionUploadLength(), stat.getSessionDownloadLength(), left,
           numWant,
-          httpAnnounceKey_);
+          (unsigned int)httpAnnounceKey_);
   const char* event = announceList_.getEventString();
   if (option_->getAsBool(PREF_BT_FORCE_ENCRYPTION) ||
       option_->getAsBool(PREF_BT_REQUIRE_CRYPTO)) {
@@ -196,10 +196,6 @@ std::string DefaultBtAnnounce::getAnnounceUrl()
   }
   else {
     uri += "&supportcrypto=1";
-  }
-  if (!option_->blank(PREF_BT_EXTERNAL_IP)) {
-    uri += "&ip=";
-    uri += option_->get(PREF_BT_EXTERNAL_IP);
   }
   return uri;
 }

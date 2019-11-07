@@ -357,7 +357,7 @@ void DefaultBtAnnounceTest::testGetAnnounceUrl_externalIP()
                   "info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%01%23Eg&"
                   "peer_id=-aria2-ultrafastdltl&port=6989&uploaded=1572864&"
                   "downloaded=1310720&left=1572864&numwant=50&key=fastdltl&"
-                  "compact=1&supportcrypto=1&event=started&ip=192.168.1.1"),
+                  "compact=1&supportcrypto=1&event=started"),
       btAnnounce.getAnnounceUrl());
 
   std::shared_ptr<UDPTrackerRequest> req;
