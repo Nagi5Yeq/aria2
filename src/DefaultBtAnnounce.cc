@@ -72,6 +72,7 @@ DefaultBtAnnounce::DefaultBtAnnounce(DownloadContext* downloadContext,
       randomizer_(SimpleRandomizer::getInstance().get()),
       tcpPort_(0)
 {
+  httpAnnounceKey_ = randomizer_.getRandomNumber(INT_MAX);
 }
 
 DefaultBtAnnounce::~DefaultBtAnnounce() = default;
@@ -168,7 +169,7 @@ std::string DefaultBtAnnounce::getAnnounceUrl()
           "downloaded=%" PRId64 "&"
           "left=%" PRId64 "&"
           "compact=1&"
-          "key=%s&"
+          "key=%x&"
           "numwant=%d&"
           "no_peer_id=1",
           util::percentEncode(bittorrent::getInfoHash(downloadContext_),
@@ -177,9 +178,7 @@ std::string DefaultBtAnnounce::getAnnounceUrl()
           util::percentEncode(bittorrent::getStaticPeerId(), PEER_ID_LENGTH)
               .c_str(),
           stat.getSessionUploadLength(), stat.getSessionDownloadLength(), left,
-          util::percentEncode(
-              bittorrent::getStaticPeerId() + PEER_ID_LENGTH - keyLen, keyLen)
-              .c_str(),
+          httpAnnounceKey_,
           numWant);
   if (tcpPort_) {
     uri += fmt("&port=%u", tcpPort_);

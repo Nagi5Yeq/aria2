@@ -66,6 +66,7 @@ private:
   std::shared_ptr<PieceStorage> pieceStorage_;
   std::shared_ptr<PeerStorage> peerStorage_;
   uint16_t tcpPort_;
+  int httpAnnounceKey_;
 
   bool adjustAnnounceList();
 
