@@ -72,7 +72,7 @@ DefaultBtAnnounce::DefaultBtAnnounce(DownloadContext* downloadContext,
       randomizer_(SimpleRandomizer::getInstance().get()),
       tcpPort_(0)
 {
-  httpAnnounceKey_ = randomizer_.getRandomNumber(INT_MAX);
+  httpAnnounceKey_ = randomizer_->getRandomNumber(INT_MAX);
 }
 
 DefaultBtAnnounce::~DefaultBtAnnounce() = default;
@@ -162,28 +162,30 @@ std::string DefaultBtAnnounce::getAnnounceUrl()
   const size_t keyLen = 8;
   std::string uri = announceList_.getAnnounce();
   uri += uriHasQuery(uri) ? "&" : "?";
-  uri +=
-      fmt("info_hash=%s&"
-          "peer_id=%s&"
-          "uploaded=%" PRId64 "&"
-          "downloaded=%" PRId64 "&"
-          "left=%" PRId64 "&"
-          "compact=1&"
-          "key=%x&"
-          "numwant=%d&"
-          "no_peer_id=1",
-          util::percentEncode(bittorrent::getInfoHash(downloadContext_),
+  uri += fmt("info_hash=%s&"
+             "peer_id=%s&",
+             util::percentEncode(bittorrent::getInfoHash(downloadContext_),
                               INFO_HASH_LENGTH)
               .c_str(),
-          util::percentEncode(bittorrent::getStaticPeerId(), PEER_ID_LENGTH)
-              .c_str(),
-          stat.getSessionUploadLength(), stat.getSessionDownloadLength(), left,
-          httpAnnounceKey_,
-          numWant);
+             util::percentEncode(bittorrent::getStaticPeerId(), PEER_ID_LENGTH)
+              .c_str());
   if (tcpPort_) {
     uri += fmt("&port=%u", tcpPort_);
   }
+  uri += fmt("uploaded=%" PRId64 "&"
+          "downloaded=%" PRId64 "&"
+          "left=%" PRId64 "&"
+          "numwant=%d&"
+          "key=%x&"
+          "compact=1&"
+          stat.getSessionUploadLength(), stat.getSessionDownloadLength(), left,
+          numWant,
+          httpAnnounceKey_);
   const char* event = announceList_.getEventString();
+  if (option_->getAsBool(PREF_BT_FORCE_ENCRYPTION) ||
+      option_->getAsBool(PREF_BT_REQUIRE_CRYPTO)) {
+    uri += "&requirecrypto=1";
+  }
   if (event[0]) {
     uri += "&event=";
     uri += event;
@@ -191,10 +193,6 @@ std::string DefaultBtAnnounce::getAnnounceUrl()
   if (!trackerId_.empty()) {
     uri += "&trackerid=";
     uri += util::percentEncode(trackerId_);
-  }
-  if (option_->getAsBool(PREF_BT_FORCE_ENCRYPTION) ||
-      option_->getAsBool(PREF_BT_REQUIRE_CRYPTO)) {
-    uri += "&requirecrypto=1";
   }
   else {
     uri += "&supportcrypto=1";

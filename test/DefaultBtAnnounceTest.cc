@@ -156,33 +156,34 @@ void DefaultBtAnnounceTest::testNoMoreAnnounce()
   btAnnounce.setTcpPort(6989);
 
   CPPUNIT_ASSERT_EQUAL(
-      std::string("http://localhost/"
-                  "announce?info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%"
-                  "01%23Eg&peer_id=-aria2-ultrafastdltl&uploaded=1572864&"
-                  "downloaded=1310720&left=1572864&compact=1&key=fastdltl&"
-                  "numwant=50&no_peer_id=1&port=6989&event=started&"
-                  "supportcrypto=1"),
+      std::string(
+          "http://localhost/"
+          "announce?info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%"
+          "01%23Eg&peer_id=-aria2-ultrafastdltl&port=6989&uploaded=1572864&"
+          "downloaded=1310720&left=1572864&numwant=50&key=fastdltl&"
+          "compact=1&supportcrypto=1&event=started"),
       btAnnounce.getAnnounceUrl());
 
   btAnnounce.announceSuccess();
 
   CPPUNIT_ASSERT_EQUAL(
-      std::string("http://localhost/"
-                  "announce?info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%"
-                  "01%23Eg&peer_id=-aria2-ultrafastdltl&uploaded=1572864&"
-                  "downloaded=1310720&left=1572864&compact=1&key=fastdltl&"
-                  "numwant=50&no_peer_id=1&port=6989&supportcrypto=1"),
+      std::string(
+          "http://localhost/"
+          "announce?info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%"
+          "01%23Eg&peer_id=-aria2-ultrafastdltl&port=6989&uploaded=1572864&"
+          "downloaded=1310720&left=1572864&numwant=50&"
+          "key=fastdltl&compact=1&supportcrypto=1"),
       btAnnounce.getAnnounceUrl());
 
   btAnnounce.announceFailure();
 
   CPPUNIT_ASSERT_EQUAL(
-      std::string("http://backup/"
-                  "announce?info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%"
-                  "01%23Eg&peer_id=-aria2-ultrafastdltl&uploaded=1572864&"
-                  "downloaded=1310720&left=1572864&compact=1&key=fastdltl&"
-                  "numwant=50&no_peer_id=1&port=6989&event=started&"
-                  "supportcrypto=1"),
+      std::string(
+          "http://backup/"
+          "announce?info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%"
+          "01%23Eg&peer_id=-aria2-ultrafastdltl&port=6989&uploaded=1572864&"
+          "downloaded=1310720&left=1572864&numwant=50&"
+          "key=fastdltl&compact=1&supportcrypto=1&event=started"),
       btAnnounce.getAnnounceUrl());
 
   btAnnounce.announceSuccess();
@@ -192,10 +193,9 @@ void DefaultBtAnnounceTest::testNoMoreAnnounce()
   CPPUNIT_ASSERT_EQUAL(
       std::string("http://localhost/"
                   "announce?info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%"
-                  "01%23Eg&peer_id=-aria2-ultrafastdltl&uploaded=1572864&"
-                  "downloaded=1310720&left=1572864&compact=1&key=fastdltl&"
-                  "numwant=50&no_peer_id=1&port=6989&event=completed&"
-                  "supportcrypto=1"),
+                  "01%23Eg&peer_id=-aria2-ultrafastdltl&port=6989&uploaded="
+                  "1572864&downloaded=1310720&left=1572864&numwant=50&key="
+                  "fastdltl&compact=1&supportcrypto=1&event=completed"),
       btAnnounce.getAnnounceUrl());
 
   btAnnounce.announceSuccess();
@@ -203,10 +203,9 @@ void DefaultBtAnnounceTest::testNoMoreAnnounce()
   CPPUNIT_ASSERT_EQUAL(
       std::string("http://backup/"
                   "announce?info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%"
-                  "01%23Eg&peer_id=-aria2-ultrafastdltl&uploaded=1572864&"
-                  "downloaded=1310720&left=1572864&compact=1&key=fastdltl&"
-                  "numwant=50&no_peer_id=1&port=6989&event=completed&"
-                  "supportcrypto=1"),
+                  "01%23Eg&peer_id=-aria2-ultrafastdltl&port=6989&uploaded="
+                  "1572864&downloaded=1310720&left=1572864&numwant=50&key="
+                  "fastdltl&compact=1&supportcrypto=1&event=completed"),
       btAnnounce.getAnnounceUrl());
 
   btAnnounce.announceSuccess();
@@ -216,10 +215,9 @@ void DefaultBtAnnounceTest::testNoMoreAnnounce()
   CPPUNIT_ASSERT_EQUAL(
       std::string("http://localhost/"
                   "announce?info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%"
-                  "01%23Eg&peer_id=-aria2-ultrafastdltl&uploaded=1572864&"
-                  "downloaded=1310720&left=1572864&compact=1&key=fastdltl&"
-                  "numwant=0&no_peer_id=1&port=6989&event=stopped&"
-                  "supportcrypto=1"),
+                  "01%23Eg&peer_id=-aria2-ultrafastdltl&port=6989&uploaded="
+                  "1572864&downloaded=1310720&left=1572864&numwant=0&key="
+                  "fastdltl&compact=1&supportcrypto=1&event=stopped"),
       btAnnounce.getAnnounceUrl());
 
   btAnnounce.announceSuccess();
@@ -227,10 +225,9 @@ void DefaultBtAnnounceTest::testNoMoreAnnounce()
   CPPUNIT_ASSERT_EQUAL(
       std::string("http://backup/"
                   "announce?info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%"
-                  "01%23Eg&peer_id=-aria2-ultrafastdltl&uploaded=1572864&"
-                  "downloaded=1310720&left=1572864&compact=1&key=fastdltl&"
-                  "numwant=0&no_peer_id=1&port=6989&event=stopped&"
-                  "supportcrypto=1"),
+                  "01%23Eg&peer_id=-aria2-ultrafastdltl&port=6989&uploaded="
+                  "1572864&downloaded=1310720&left=1572864&numwant=0&key="
+                  "fastdltl&compact=1&supportcrypto=1&event=stopped"),
       btAnnounce.getAnnounceUrl());
 
   btAnnounce.announceSuccess();
@@ -255,10 +252,9 @@ void DefaultBtAnnounceTest::testGetAnnounceUrl()
   CPPUNIT_ASSERT_EQUAL(
       std::string("http://localhost/"
                   "announce?info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%"
-                  "01%23Eg&peer_id=-aria2-ultrafastdltl&uploaded=1572864&"
-                  "downloaded=1310720&left=1572864&compact=1&key=fastdltl&"
-                  "numwant=50&no_peer_id=1&port=6989&event=started&"
-                  "supportcrypto=1"),
+                  "01%23Eg&peer_id=-aria2-ultrafastdltl&port=6989&uploaded="
+                  "1572864&downloaded=1310720&left=1572864&numwant=50&key="
+                  "fastdltl&compact=1&supportcrypto=1&event=started"),
       btAnnounce.getAnnounceUrl());
   req = btAnnounce.createUDPTrackerRequest("localhost", 80, 6989);
   CPPUNIT_ASSERT_EQUAL(std::string("localhost"), req->remoteAddr);
@@ -281,9 +277,9 @@ void DefaultBtAnnounceTest::testGetAnnounceUrl()
   CPPUNIT_ASSERT_EQUAL(
       std::string("http://localhost/"
                   "announce?info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%"
-                  "01%23Eg&peer_id=-aria2-ultrafastdltl&uploaded=1572864&"
-                  "downloaded=1310720&left=1572864&compact=1&key=fastdltl&"
-                  "numwant=50&no_peer_id=1&port=6989&supportcrypto=1"),
+                  "01%23Eg&peer_id=-aria2-ultrafastdltl&port=6989&uploaded="
+                  "1572864&downloaded=1310720&left=1572864&numwant=50&key="
+                  "fastdltl&compact=1&supportcrypto=1"),
       btAnnounce.getAnnounceUrl());
   req = btAnnounce.createUDPTrackerRequest("localhost", 80, 6989);
   CPPUNIT_ASSERT_EQUAL((int)UDPT_ACT_ANNOUNCE, req->action);
@@ -296,10 +292,9 @@ void DefaultBtAnnounceTest::testGetAnnounceUrl()
   CPPUNIT_ASSERT_EQUAL(
       std::string("http://localhost/"
                   "announce?info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%"
-                  "01%23Eg&peer_id=-aria2-ultrafastdltl&uploaded=1572864&"
-                  "downloaded=1310720&left=1572864&compact=1&key=fastdltl&"
-                  "numwant=50&no_peer_id=1&port=6989&event=completed&"
-                  "supportcrypto=1"),
+                  "01%23Eg&peer_id=-aria2-ultrafastdltl&port=6989&uploaded="
+                  "1572864&downloaded=1310720&left=1572864&numwant=50&key="
+                  "fastdltl&compact=1&supportcrypto=1&event=completed"),
       btAnnounce.getAnnounceUrl());
   req = btAnnounce.createUDPTrackerRequest("localhost", 80, 6989);
   CPPUNIT_ASSERT_EQUAL((int)UDPT_ACT_ANNOUNCE, req->action);
@@ -312,10 +307,9 @@ void DefaultBtAnnounceTest::testGetAnnounceUrl()
   CPPUNIT_ASSERT_EQUAL(
       std::string("http://localhost/"
                   "announce?info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%"
-                  "01%23Eg&peer_id=-aria2-ultrafastdltl&uploaded=1572864&"
-                  "downloaded=1310720&left=1572864&compact=1&key=fastdltl&"
-                  "numwant=0&no_peer_id=1&port=6989&event=stopped&"
-                  "supportcrypto=1"),
+                  "01%23Eg&peer_id=-aria2-ultrafastdltl&port=6989&uploaded="
+                  "1572864&downloaded=1310720&left=1572864&numwant=0&key="
+                  "fastdltl&compact=1&supportcrypto=1&event=stopped"),
       btAnnounce.getAnnounceUrl());
   req = btAnnounce.createUDPTrackerRequest("localhost", 80, 6989);
   CPPUNIT_ASSERT_EQUAL((int)UDPT_ACT_ANNOUNCE, req->action);
@@ -336,13 +330,11 @@ void DefaultBtAnnounceTest::testGetAnnounceUrl_withQuery()
   btAnnounce.setTcpPort(6989);
 
   CPPUNIT_ASSERT_EQUAL(
-      std::string(
-          "http://localhost/announce?k=v&"
-          "info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%01%23Eg&"
-          "peer_id=-aria2-ultrafastdltl&"
-          "uploaded=1572864&downloaded=1310720&left=1572864&compact=1&"
-          "key=fastdltl&numwant=50&no_peer_id=1&port=6989&event=started&"
-          "supportcrypto=1"),
+      std::string("http://localhost/announce?k=v&"
+                  "info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%01%23Eg&"
+                  "peer_id=-aria2-ultrafastdltl&port=6989&uploaded=1572864&"
+                  "downloaded=1310720&left=1572864&numwant=50&key=fastdltl&"
+                  "compact=1&supportcrypto=1&event=started"),
       btAnnounce.getAnnounceUrl());
 }
 
@@ -361,13 +353,11 @@ void DefaultBtAnnounceTest::testGetAnnounceUrl_externalIP()
   btAnnounce.setTcpPort(6989);
 
   CPPUNIT_ASSERT_EQUAL(
-      std::string(
-          "http://localhost/announce?"
-          "info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%01%23Eg&"
-          "peer_id=-aria2-ultrafastdltl&"
-          "uploaded=1572864&downloaded=1310720&left=1572864&compact=1&"
-          "key=fastdltl&numwant=50&no_peer_id=1&port=6989&event=started&"
-          "supportcrypto=1&ip=192.168.1.1"),
+      std::string("http://localhost/announce?"
+                  "info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%01%23Eg&"
+                  "peer_id=-aria2-ultrafastdltl&port=6989&uploaded=1572864&"
+                  "downloaded=1310720&left=1572864&numwant=50&key=fastdltl&"
+                  "compact=1&supportcrypto=1&event=started&ip=192.168.1.1"),
       btAnnounce.getAnnounceUrl());
 
   std::shared_ptr<UDPTrackerRequest> req;
@@ -395,10 +385,9 @@ void DefaultBtAnnounceTest::testIsAllAnnounceFailed()
   CPPUNIT_ASSERT_EQUAL(
       std::string("http://localhost/"
                   "announce?info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%"
-                  "01%23Eg&peer_id=-aria2-ultrafastdltl&uploaded=1572864&"
-                  "downloaded=1310720&left=1572864&compact=1&key=fastdltl&"
-                  "numwant=50&no_peer_id=1&port=6989&event=started&"
-                  "supportcrypto=1"),
+                  "01%23Eg&peer_id=-aria2-ultrafastdltl&port=6989&uploaded="
+                  "1572864&downloaded=1310720&left=1572864&numwant=50&key="
+                  "fastdltl&compact=1&supportcrypto=1&event=started"),
       btAnnounce.getAnnounceUrl());
 
   btAnnounce.announceFailure();
@@ -406,10 +395,9 @@ void DefaultBtAnnounceTest::testIsAllAnnounceFailed()
   CPPUNIT_ASSERT_EQUAL(
       std::string("http://backup/"
                   "announce?info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%"
-                  "01%23Eg&peer_id=-aria2-ultrafastdltl&uploaded=1572864&"
-                  "downloaded=1310720&left=1572864&compact=1&key=fastdltl&"
-                  "numwant=50&no_peer_id=1&port=6989&event=started&"
-                  "supportcrypto=1"),
+                  "01%23Eg&peer_id=-aria2-ultrafastdltl&port=6989&uploaded="
+                  "1572864&downloaded=1310720&left=1572864&numwant=50&key="
+                  "fastdltl&compact=1&supportcrypto=1&event=started"),
       btAnnounce.getAnnounceUrl());
 
   btAnnounce.announceFailure();
@@ -442,10 +430,9 @@ void DefaultBtAnnounceTest::testURLOrderInStoppedEvent()
   CPPUNIT_ASSERT_EQUAL(
       std::string("http://localhost1/"
                   "announce?info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%"
-                  "01%23Eg&peer_id=-aria2-ultrafastdltl&uploaded=1572864&"
-                  "downloaded=1310720&left=1572864&compact=1&key=fastdltl&"
-                  "numwant=50&no_peer_id=1&port=6989&event=started&"
-                  "supportcrypto=1"),
+                  "01%23Eg&peer_id=-aria2-ultrafastdltl&port=6989&uploaded="
+                  "1572864&downloaded=1310720&left=1572864&numwant=50&key="
+                  "fastdltl&compact=1&supportcrypto=1&event=started"),
       btAnnounce.getAnnounceUrl());
 
   btAnnounce.announceSuccess();
@@ -455,10 +442,9 @@ void DefaultBtAnnounceTest::testURLOrderInStoppedEvent()
   CPPUNIT_ASSERT_EQUAL(
       std::string("http://localhost1/"
                   "announce?info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%"
-                  "01%23Eg&peer_id=-aria2-ultrafastdltl&uploaded=1572864&"
-                  "downloaded=1310720&left=1572864&compact=1&key=fastdltl&"
-                  "numwant=0&no_peer_id=1&port=6989&event=stopped&"
-                  "supportcrypto=1"),
+                  "01%23Eg&peer_id=-aria2-ultrafastdltl&port=6989&uploaded="
+                  "1572864&downloaded=1310720&left=1572864&numwant=0&key="
+                  "fastdltl&compact=1&supportcrypto=1&event=stopped"),
       btAnnounce.getAnnounceUrl());
 
   btAnnounce.announceFailure();
@@ -466,10 +452,9 @@ void DefaultBtAnnounceTest::testURLOrderInStoppedEvent()
   CPPUNIT_ASSERT_EQUAL(
       std::string("http://localhost2/"
                   "announce?info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%"
-                  "01%23Eg&peer_id=-aria2-ultrafastdltl&uploaded=1572864&"
-                  "downloaded=1310720&left=1572864&compact=1&key=fastdltl&"
-                  "numwant=0&no_peer_id=1&port=6989&event=stopped&"
-                  "supportcrypto=1"),
+                  "01%23Eg&peer_id=-aria2-ultrafastdltl&port=6989&uploaded="
+                  "1572864&downloaded=1310720&left=1572864&numwant=0&key="
+                  "fastdltl&compact=1&supportcrypto=1&event=stopped"),
       btAnnounce.getAnnounceUrl());
 
   btAnnounce.announceSuccess();
@@ -494,10 +479,9 @@ void DefaultBtAnnounceTest::testURLOrderInCompletedEvent()
   CPPUNIT_ASSERT_EQUAL(
       std::string("http://localhost1/"
                   "announce?info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%"
-                  "01%23Eg&peer_id=-aria2-ultrafastdltl&uploaded=1572864&"
-                  "downloaded=1310720&left=1572864&compact=1&key=fastdltl&"
-                  "numwant=50&no_peer_id=1&port=6989&event=started&"
-                  "supportcrypto=1"),
+                  "01%23Eg&peer_id=-aria2-ultrafastdltl&port=6989&uploaded="
+                  "1572864&downloaded=1310720&left=1572864&numwant=50&key="
+                  "fastdltl&compact=1&supportcrypto=1&event=started"),
       btAnnounce.getAnnounceUrl());
 
   btAnnounce.announceSuccess();
@@ -507,10 +491,9 @@ void DefaultBtAnnounceTest::testURLOrderInCompletedEvent()
   CPPUNIT_ASSERT_EQUAL(
       std::string("http://localhost1/"
                   "announce?info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%"
-                  "01%23Eg&peer_id=-aria2-ultrafastdltl&uploaded=1572864&"
-                  "downloaded=1310720&left=1572864&compact=1&key=fastdltl&"
-                  "numwant=50&no_peer_id=1&port=6989&event=completed&"
-                  "supportcrypto=1"),
+                  "01%23Eg&peer_id=-aria2-ultrafastdltl&port=6989&uploaded="
+                  "1572864&downloaded=1310720&left=1572864&numwant=50&key="
+                  "fastdltl&compact=1&supportcrypto=1&event=completed"),
       btAnnounce.getAnnounceUrl());
 
   btAnnounce.announceFailure();
@@ -518,10 +501,9 @@ void DefaultBtAnnounceTest::testURLOrderInCompletedEvent()
   CPPUNIT_ASSERT_EQUAL(
       std::string("http://localhost2/"
                   "announce?info_hash=%01%23Eg%89%AB%CD%EF%01%23Eg%89%AB%CD%EF%"
-                  "01%23Eg&peer_id=-aria2-ultrafastdltl&uploaded=1572864&"
-                  "downloaded=1310720&left=1572864&compact=1&key=fastdltl&"
-                  "numwant=50&no_peer_id=1&port=6989&event=completed&"
-                  "supportcrypto=1"),
+                  "01%23Eg&peer_id=-aria2-ultrafastdltl&port=6989&uploaded="
+                  "1572864&downloaded=1310720&left=1572864&numwant=50&key="
+                  "fastdltl&compact=1&supportcrypto=1&event=completed"),
       btAnnounce.getAnnounceUrl());
 
   btAnnounce.announceSuccess();
