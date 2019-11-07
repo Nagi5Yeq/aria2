@@ -602,6 +602,7 @@ void HttpRequestTest::testCreateRequest_wantDigest()
   httpRequest.setRequest(request);
   httpRequest.setAuthConfigFactory(authConfigFactory_.get());
   httpRequest.setOption(option_.get());
+  httpRequest.setNoWantDigest(false);
 
   std::string wantDigest;
   if (MessageDigest::supports("sha-512")) {
