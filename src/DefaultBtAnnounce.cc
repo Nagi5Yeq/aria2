@@ -170,14 +170,14 @@ std::string DefaultBtAnnounce::getAnnounceUrl()
              util::percentEncode(bittorrent::getStaticPeerId(), PEER_ID_LENGTH)
               .c_str());
   if (tcpPort_) {
-    uri += fmt("&port=%u", tcpPort_);
+    uri += fmt("port=%u&", tcpPort_);
   }
   uri += fmt("uploaded=%" PRId64 "&"
           "downloaded=%" PRId64 "&"
           "left=%" PRId64 "&"
           "numwant=%d&"
           "key=%x&"
-          "compact=1&",
+          "compact=1",
           stat.getSessionUploadLength(), stat.getSessionDownloadLength(), left,
           numWant,
           (unsigned int)httpAnnounceKey_);
