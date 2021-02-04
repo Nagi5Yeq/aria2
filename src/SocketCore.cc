@@ -1570,6 +1570,9 @@ bool verifyHostname(const std::string& hostname,
 namespace {
 bool ipv4AddrConfigured = true;
 bool ipv6AddrConfigured = true;
+
+bool hasGlobalIpv6Addr = false;
+char globalIpv6Addr[NI_MAXHOST];
 } // namespace
 
 #ifdef __MINGW32__
@@ -1694,6 +1697,11 @@ void checkAddrconfig()
           !IN6_IS_ADDR_LINKLOCAL(&ad.in6.sin6_addr)) {
         ipv6AddrConfigured = true;
         found = true;
+        if (!hasGlobalIpv6Addr &&
+            inetNtop(AF_INET6, &ad.in6.sin6_addr, globalIpv6Addr,
+                     sizeof(globalIpv6Addr) == 0)) {
+          hasGlobalIpv6Addr = true;
+        }
       }
       break;
     }
@@ -1722,6 +1730,14 @@ void checkAddrconfig()
 bool getIPv4AddrConfigured() { return ipv4AddrConfigured; }
 
 bool getIPv6AddrConfigured() { return ipv6AddrConfigured; }
+
+const char* getGlobalIpv6Addr()
+{
+  if (hasGlobalIpv6Addr == true) {
+    return globalIpv6Addr;
+  }
+  return nullptr;
+}
 
 } // namespace net
 

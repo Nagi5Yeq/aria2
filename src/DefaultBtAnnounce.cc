@@ -165,22 +165,22 @@ std::string DefaultBtAnnounce::getAnnounceUrl()
   uri += fmt("info_hash=%s&"
              "peer_id=%s&",
              util::percentEncode(bittorrent::getInfoHash(downloadContext_),
-                              INFO_HASH_LENGTH)
-              .c_str(),
+                                 INFO_HASH_LENGTH)
+                 .c_str(),
              util::percentEncode(bittorrent::getStaticPeerId(), PEER_ID_LENGTH)
-              .c_str());
+                 .c_str());
   if (tcpPort_) {
     uri += fmt("port=%u&", tcpPort_);
   }
   uri += fmt("uploaded=%" PRId64 "&"
-          "downloaded=%" PRId64 "&"
-          "left=%" PRId64 "&"
-          "numwant=%d&"
-          "key=%x&"
-          "compact=1",
-          stat.getSessionUploadLength(), stat.getSessionDownloadLength(), left,
-          numWant,
-          (unsigned int)httpAnnounceKey_);
+             "downloaded=%" PRId64 "&"
+             "left=%" PRId64 "&"
+             "numwant=%d&"
+             "key=%x&"
+             "compact=1&"
+             "supportcrypto=1",
+             stat.getSessionUploadLength(), stat.getSessionDownloadLength(),
+             left, numWant, (unsigned int)httpAnnounceKey_);
   const char* event = announceList_.getEventString();
   if (option_->getAsBool(PREF_BT_FORCE_ENCRYPTION) ||
       option_->getAsBool(PREF_BT_REQUIRE_CRYPTO)) {
@@ -194,8 +194,14 @@ std::string DefaultBtAnnounce::getAnnounceUrl()
     uri += "&trackerid=";
     uri += util::percentEncode(trackerId_);
   }
-  else {
-    uri += "&supportcrypto=1";
+  if (!option_->blank(PREF_BT_EXTERNAL_IP)) {
+    uri += "&ip=";
+    uri += option_->get(PREF_BT_EXTERNAL_IP);
+  }
+  const char* globalIpv6Addr = net::getGlobalIpv6Addr();
+  if (globalIpv6Addr != nullptr) {
+    uri += "&ipv6=";
+    uri += globalIpv6Addr;
   }
   return uri;
 }
