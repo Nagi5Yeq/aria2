@@ -322,6 +322,8 @@ PrefPtr PREF_CONDITIONAL_GET = makePref("conditional-get");
 PrefPtr PREF_SELECT_LEAST_USED_HOST = makePref("select-least-used-host");
 // value: true | false
 PrefPtr PREF_ENABLE_ASYNC_DNS6 = makePref("enable-async-dns6");
+// values: true | false
+PrefPtr PERF_ASYNC_DNS_ALLOW_IPV6ONLY = makePref("async-dns-allow-ipv6only");
 // value: 1*digit
 PrefPtr PREF_MAX_DOWNLOAD_RESULT = makePref("max-download-result");
 // value: 1*digit

@@ -764,6 +764,13 @@
   _(" --enable-async-dns6[=true|false] Enable IPv6 name resolution in asynchronous\n" \
     "                              DNS resolver. This option will be ignored when\n" \
     "                              --async-dns=false.")
+#define TEXT_ASYNC_DNS_ALLOW_IPV6ONLY           \
+  _(" --async-dns-allow-ipv6only[=true|false]\n" \
+    "                              When using asynchronous DNS resolver, aria2 will\n" \
+    "                              wait until at least one IPv4 resolution succeeds\n" \
+    "                              by default, which will result in the timeout of\n" \
+    "                              the resolution of IPv6-only domains. Turn this on\n" \
+    "                              to avoid such problem.")
 #define TEXT_ENABLE_DHT6                        \
   _(" --enable-dht6[=true|false]   Enable IPv6 DHT functionality.\n" \
     "                              Use --dht-listen-port option to specify port\n" \

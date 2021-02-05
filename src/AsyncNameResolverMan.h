@@ -58,6 +58,8 @@ public:
   void setIPv4(bool ipv4) { ipv4_ = ipv4; }
   // Enable IPv6 address lookup. default: true
   void setIPv6(bool ipv6) { ipv6_ = ipv6; }
+  // Allow resolver returning only ipv6 address. default: false
+  void setAllowIpv6Only(bool allow) { allowIpv6Only_ = allow; }
   // Returns true if asynchronous name resolution has been started.
   bool started() const;
   // Starts asynchronous name resolution.
@@ -92,6 +94,7 @@ private:
   int resolverCheck_;
   bool ipv4_;
   bool ipv6_;
+  bool allowIpv6Only_;
 };
 
 void configureAsyncNameResolverMan(AsyncNameResolverMan* asyncNameResolverMan,

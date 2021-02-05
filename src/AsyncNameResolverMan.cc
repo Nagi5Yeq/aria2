@@ -49,7 +49,11 @@
 namespace aria2 {
 
 AsyncNameResolverMan::AsyncNameResolverMan()
-    : numResolver_(0), resolverCheck_(0), ipv4_(true), ipv6_(true)
+    : numResolver_(0),
+      resolverCheck_(0),
+      ipv4_(true),
+      ipv6_(true),
+      allowIpv6Only_(false)
 {
 }
 
@@ -167,15 +171,25 @@ int AsyncNameResolverMan::getStatus() const
       break;
     }
   }
-  // If we got a IPv4 lookup response, we don't wait for a IPv6 lookup
-  // response. This is because DNS servers may drop AAAA queries and we
-  // have to wait for a long time before timeout. We don't do the
-  // inverse, because, based on today's deployment of DNS servers,
-  // almost all of them can respond to A queries just fine.
-  if ((success && ipv4Success) || success == numResolver_) {
-    return 1;
+  if (allowIpv6Only_ == true) {
+    // The waiting process of IPv4 and IPv6 lookup will eventually timeout
+    // the resolution of IPv6-only domains, so just report success regardless of
+    // which address family the result belongs to in such case.
+    if (success > 0) {
+      return 1;
+    }
   }
-  else if (error == numResolver_) {
+  else {
+    // If we got a IPv4 lookup response, we don't wait for a IPv6 lookup
+    // response. This is because DNS servers may drop AAAA queries and we
+    // have to wait for a long time before timeout. We don't do the
+    // inverse, because, based on today's deployment of DNS servers,
+    // almost all of them can respond to A queries just fine.
+    if ((success && ipv4Success) || success == numResolver_) {
+      return 1;
+    }
+  }
+  if (error == numResolver_) {
     return -1;
   }
   else {
@@ -222,6 +236,8 @@ void configureAsyncNameResolverMan(AsyncNameResolverMan* asyncNameResolverMan,
   if (!net::getIPv6AddrConfigured() || option->getAsBool(PREF_DISABLE_IPV6)) {
     asyncNameResolverMan->setIPv6(false);
   }
+  asyncNameResolverMan->setAllowIpv6Only(
+      option->getAsBool(PERF_ASYNC_DNS_ALLOW_IPV6ONLY));
 }
 
 } // namespace aria2

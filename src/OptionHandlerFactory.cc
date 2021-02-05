@@ -255,6 +255,16 @@ std::vector<OptionHandler*> OptionHandlerFactory::createOptionHandlers()
     op->setChangeOptionForReserved(true);
     handlers.push_back(op);
   }
+  {
+    OptionHandler* op(new BooleanOptionHandler(
+        PERF_ASYNC_DNS_ALLOW_IPV6ONLY, TEXT_ASYNC_DNS_ALLOW_IPV6ONLY,
+        A2_V_FALSE, OptionHandler::OPT_ARG));
+    op->addTag(TAG_ADVANCED);
+    op->setInitialOption(true);
+    op->setChangeGlobalOption(true);
+    op->setChangeOptionForReserved(true);
+    handlers.push_back(op);
+  }
 #endif // ENABLE_ASYNC_DNS
   {
     OptionHandler* op(new BooleanOptionHandler(PREF_ENABLE_COLOR,

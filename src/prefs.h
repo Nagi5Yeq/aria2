@@ -275,6 +275,8 @@ extern PrefPtr PREF_CONDITIONAL_GET;
 extern PrefPtr PREF_SELECT_LEAST_USED_HOST;
 // value: true | false
 extern PrefPtr PREF_ENABLE_ASYNC_DNS6;
+// values: true | false
+extern PrefPtr PERF_ASYNC_DNS_ALLOW_IPV6ONLY;
 // value: 1*digit
 extern PrefPtr PREF_MAX_DOWNLOAD_RESULT;
 // value: 1*digit

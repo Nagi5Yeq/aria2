@@ -1699,7 +1699,7 @@ void checkAddrconfig()
         found = true;
         if (!hasGlobalIpv6Addr &&
             inetNtop(AF_INET6, &ad.in6.sin6_addr, globalIpv6Addr,
-                     sizeof(globalIpv6Addr) == 0)) {
+                     sizeof(globalIpv6Addr)) == 0) {
           hasGlobalIpv6Addr = true;
         }
       }
