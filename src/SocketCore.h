@@ -425,9 +425,6 @@ void checkAddrconfig();
 bool getIPv4AddrConfigured();
 bool getIPv6AddrConfigured();
 
-// Returns a unicast ipv6 address or NULL if not exist. Used for announce.
-const char* getGlobalIpv6Addr();
-
 } // namespace net
 
 } // namespace aria2

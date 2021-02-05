@@ -53,7 +53,7 @@ AsyncNameResolverMan::AsyncNameResolverMan()
       resolverCheck_(0),
       ipv4_(true),
       ipv6_(true),
-      allowIpv6Only_(false)
+      allowIPv6Only_(false)
 {
 }
 
@@ -171,7 +171,7 @@ int AsyncNameResolverMan::getStatus() const
       break;
     }
   }
-  if (allowIpv6Only_ == true) {
+  if (allowIPv6Only_ == true) {
     // The waiting process of IPv4 and IPv6 lookup will eventually timeout
     // the resolution of IPv6-only domains, so just report success regardless of
     // which address family the result belongs to in such case.
@@ -236,7 +236,7 @@ void configureAsyncNameResolverMan(AsyncNameResolverMan* asyncNameResolverMan,
   if (!net::getIPv6AddrConfigured() || option->getAsBool(PREF_DISABLE_IPV6)) {
     asyncNameResolverMan->setIPv6(false);
   }
-  asyncNameResolverMan->setAllowIpv6Only(
+  asyncNameResolverMan->setAllowIPv6Only(
       option->getAsBool(PERF_ASYNC_DNS_ALLOW_IPV6ONLY));
 }
 

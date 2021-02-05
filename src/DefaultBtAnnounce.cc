@@ -198,11 +198,6 @@ std::string DefaultBtAnnounce::getAnnounceUrl()
     uri += "&ip=";
     uri += option_->get(PREF_BT_EXTERNAL_IP);
   }
-  const char* globalIpv6Addr = net::getGlobalIpv6Addr();
-  if (globalIpv6Addr != nullptr) {
-    uri += "&ipv6=";
-    uri += globalIpv6Addr;
-  }
   return uri;
 }
 
